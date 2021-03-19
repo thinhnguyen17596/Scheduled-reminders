@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="reminder_view_tree" model="ir.ui.view">
+            <field name="name">reminder.view.tree</field>
+            <field name="model">scheduled.reminders</field>
+            <field name="arch" type="xml">
+                <tree string="reminder_tree">
+                    <field name="name"/>
+                    <field name="recipients"/>
+<!--                    <field name="name_recipients" />-->
+                    <field name="description"/>
+                    <field name="time_reminder"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="reminder_view_form" model="ir.ui.view">
+            <field name="name">reminder.view.form</field>
+            <field name="model">scheduled.reminders</field>
+            <field name="arch" type="xml">
+                <form string="reminder_form">
+                    <header>
+                        <button name="action_send_email" type="object"  string="Send By Email" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="recipients" />
+                            <field name="name_recipients" />
+                            <field name="time_reminder" />
+                        </group>
+                        <notebook>
+                            <page string="Comments">
+                                <group>
+                                    <field name="description"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        
+        <!--        kanban view-->
+        <record id="reminder_view_kanban" model="ir.ui.view">
+            <field name="name">reminder.view.kanban</field>
+            <field name="model">scheduled.reminders</field>
+            <field name="arch" type="xml">
+                <kanban >
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="recipients"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class=" oe_kanban_global_click o_kanban_record_has_image_fill o_book_view_kanban">
+                                
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="display_name"/>
+                                    </strong>
+                                    <div class="o_kanban_tags_section"/>
+                                    <ul>
+                                        <li>Lời nhắc :
+                                            <field name="name"/>
+                                        </li>
+                                        <li>Người nhận :
+                                            <field name="recipients"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        
+        <record id="reminder_action" model="ir.actions.act_window">
+            <field name="name">Reminders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">scheduled.reminders</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        
+        <menuitem id="reminder_root_menu_id" name="Reminder" sequence="2"/>
+        <menuitem id="reminder_child_menu_id" parent="reminder_root_menu_id" action="reminder_action"
+                  name="Reminder" sequence="1"/>
+    </data>
+</odoo>
