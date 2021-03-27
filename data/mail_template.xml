@@ -2,18 +2,18 @@
 <odoo>
 
     <!--Creating Email Template in Odoo-->
-    <data noupdate="1">
+    <data>
         <record id="reminder_email_template" model="mail.template">
             <field name="name">Reminder: Send by email</field>
             <field name="model_id" ref="scheduled_reminders.model_scheduled_reminders"/>
             <field name="email_from">${object.user_id.email_formatted |safe}</field>
-            
-            <field name="email_to">${object.email_recipients}</field>
-            <field name="subject">Reminder (Ref ${object.name})</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="email_to">${object.recipients.email}</field>
+            <field name="subject">Reminder (Ref ${object.recipients.name})</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
-                        Dear ${object.name_recipients}
+                        Dear ${object.recipients.name}
                         <br /><br />
                         Lời nhắn : ${object.description}
                         <br /><br />
