@@ -9,7 +9,7 @@ class ScheduledReminders(models.Model):
 	_inherit = ['mail.thread', 'mail.activity.mixin']
 	_description = 'Reminders Record'
 	
-	name = fields.Char('Thu')
+	name = fields.Char('Name')
 	
 	recipients = fields.Many2many(string="Người nhận", comodel_name='hr.employee')
 	description = fields.Text(string="Lời nhắn")
